@@ -1,0 +1,10 @@
+export const USERNAME_CHANGE = 'usernameOnChange';
+export const PASSWORD_CHANGE = 'passwordChange';
+export const CAPTCHA_CHANGE = 'captchaChange';
+export const CAPTCHASRC_CHANGE = 'captchaSrcOnChange';
+export const LOGINCHANGE = 'loginChange';
+export const LOGINSTATE = 'loginState';
+export const SET_INFO = "setInfo";
+export const FAILED_GRADE = "failedGrade";
+export const SEARCH_GRADE = 'searchGrade';
+export const LOGIN_OUT = "loginOut";

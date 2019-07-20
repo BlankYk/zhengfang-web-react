@@ -1,0 +1,46 @@
+POST https://backstage.edu.css0209.cn/user/login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; username="201713013059" password="yk17602849178" captcha="mfnt"
+
+field-value
+--WebAppBoundary--
+
+<> 2019-06-30T040054.200.json
+
+###
+
+POST https://backstage.edu.css0209.cn/user/login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; username="201713013059" password="yk17602849178" captcha="yh4c"
+
+field-value
+--WebAppBoundary--
+
+<> 2019-06-30T040040.200.json
+
+###
+
+GET https://backstage.edu.css0209.cn/user/captcha?path=
+
+<> 2019-06-30T035900.200.txt
+
+###
+
+GET https://backstage.edu.css0209.cn/user/myinfo
+Accept:
+
+<> 2019-06-30T035642.200.json
+
+###
+
+GET https://httpbin.org/ip
+Accept: application/json
+
+<> 2019-06-30T035317.200.json
+
+###
+
