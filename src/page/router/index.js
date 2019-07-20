@@ -4,7 +4,6 @@ import Login from '../login/';
 import Index from '../index';
 import NotFound from '../notfound/';
 import store from '../../store/';
-// import {loginChange} from "../../store/actionCreators";
 
 class MyRouter extends React.Component{
     constructor(props){

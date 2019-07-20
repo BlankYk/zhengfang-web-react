@@ -44,7 +44,7 @@ class FailedGrade extends React.Component {
     }
 
     handleFailedGrade() {
-        fetch("/user/failedGrade?"+new Date().getMilliseconds(), {
+        fetch("https://backstage.edu.css0209.cn/user/failedGrade?"+new Date().getMilliseconds(), {
             credentials: "include"
         }).then(rep => {
             return rep.json();

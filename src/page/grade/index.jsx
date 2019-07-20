@@ -49,7 +49,6 @@ class Grade extends React.Component {
                         '请选择学期!',
                 });
             }else{
-                console.log("update state");
                 let newState = {
                     year: values.year,
                     semester: values.semester,

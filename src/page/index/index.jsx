@@ -6,6 +6,7 @@ import {
 import store from '../../store/';
 import {loginChange, loginOut, setInfo} from "../../store/actionCreators";
 import Grade from "../grade";
+import Footer from "../footer";
 
 class Index extends React.Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class Index extends React.Component {
     }
 
     handleGetState() {
-        fetch("/user/myInfo?" + new Date().getMilliseconds(), {
+        fetch("https://backstage.edu.css0209.cn/user/myInfo?" + new Date().getMilliseconds(), {
             credentials: "include"
         }).then(rep => {
             return rep.json()
@@ -46,13 +47,12 @@ class Index extends React.Component {
     }
 
     handleLoginOut() {
-        fetch("/user/loginOut?"+new Date().getMilliseconds(), {
+        fetch("https://backstage.edu.css0209.cn/user/loginOut?"+new Date().getMilliseconds(), {
             method: "delete",
             credentials: "include"
         }).then(rep => {
             return rep.json();
         }).then(json => {
-            console.log(json);
             const action = loginOut();
             store.dispatch(action);
             message.info(json.msg);
@@ -63,6 +63,7 @@ class Index extends React.Component {
     render() {
         const storeState = store.getState();
         return (
+            <React.Fragment>
             <IndexWrapper>
                 <h1>川航成绩查询平台</h1>
                 <div className={"userInfoBox"}>
@@ -77,6 +78,7 @@ class Index extends React.Component {
                 </div>
                 <Grade/>
             </IndexWrapper>
+            </React.Fragment>
         );
 
     }

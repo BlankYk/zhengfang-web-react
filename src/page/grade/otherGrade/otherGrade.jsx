@@ -89,7 +89,7 @@ class OtherGrade extends React.Component {
         this.setState({
             tableLoading: true
         });
-        fetch("/user/selectGrade?year=" + this.storeState.year
+        fetch("https://backstage.edu.css0209.cn/user/selectGrade?year=" + this.storeState.year
             + "&semester=" + this.storeState.semester
             + "&courseNature=" + this.storeState.courseNature
             + "&btn=" + this.storeState.btn+"&r="+Math.random(), {
@@ -105,7 +105,7 @@ class OtherGrade extends React.Component {
                 grade: json.item.grade,
                 tableLoading: false
             })
-        })
+        }).catch()
     }
 
     render() {

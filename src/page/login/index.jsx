@@ -8,6 +8,7 @@ import store from '../../store';
 import {
     getUsernameOnchange, getCaptchaSrcChange, getPasswordChange, getCaptchaChange, loginChange
 } from '../../store/actionCreators';
+import Footer from "../footer";
 
 
 class Login extends React.Component {
@@ -21,12 +22,6 @@ class Login extends React.Component {
         this.handleCaptchaSrcChange();
     }
 
-    componentWillUnmount() {
-        this.setState = (state, callback) => {
-            return;
-        };
-    }
-
     handleStoreChange() {
         this.setState(store.getState());
     }
@@ -38,7 +33,7 @@ class Login extends React.Component {
         formData.append("password", this.state.password);
         formData.append("captcha", this.state.captcha);
         message.loading("正在登录！");
-        fetch("/user/login", {
+        fetch("https://backstage.edu.css0209.cn/user/login", {
             method: "post",
             body: formData,
             credentials: 'include'
@@ -78,6 +73,7 @@ class Login extends React.Component {
 
     render() {
         return (
+            <React.Fragment>
             <LoginWrapper>
                 <Form onSubmit={this.handleSubmit.bind(this)} method={"post"}>
                     <h1>川航成绩查询</h1>
@@ -103,6 +99,8 @@ class Login extends React.Component {
                     <button type="submit" className={"login"}>登录</button>
                 </Form>
             </LoginWrapper>
+                <Footer/>
+            </React.Fragment>
         );
     }
 

@@ -8,7 +8,7 @@ const defaultState = {
     username: "",
     password: "",
     captcha: "",
-    captchaSrc: "/user/captcha?path=" + time.getHours()+time.getMinutes()+time.getSeconds()+time.getMilliseconds(),
+    captchaSrc: "https://backstage.edu.css0209.cn/user/captcha?path=" + time.getHours()+time.getMinutes()+time.getSeconds()+time.getMilliseconds(),
     isLogin: false,
     info: {},
     gradeState: {
@@ -29,7 +29,7 @@ export default (state = defaultState, action) => {
     if (action.type === CAPTCHASRC_CHANGE) {
         const newState = JSON.parse(JSON.stringify(state));
         let newTime = new Date();
-        newState.captchaSrc = "/user/captcha?path=" + newTime.getHours()+newTime.getMinutes()+newTime.getSeconds()+newTime.getMilliseconds();
+        newState.captchaSrc = "https://backstage.edu.css0209.cn/user/captcha?path=" + newTime.getHours()+newTime.getMinutes()+newTime.getSeconds()+newTime.getMilliseconds();
         return newState;
     }
     if (action.type === PASSWORD_CHANGE) {
