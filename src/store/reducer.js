@@ -1,14 +1,15 @@
 import {
     USERNAME_CHANGE, CAPTCHASRC_CHANGE, PASSWORD_CHANGE, CAPTCHA_CHANGE,
-    LOGINCHANGE, LOGINSTATE, SET_INFO, FAILED_GRADE, LOGIN_OUT, SEARCH_GRADE
+    LOGINCHANGE, LOGINSTATE, SET_INFO, FAILED_GRADE, LOGIN_OUT, SEARCH_GRADE,
+    GET_TOKEN
 } from "./ActionTypes";
 
-let time = new Date();
 const defaultState = {
+    backendHost: "https://backstage.edu.css0209.cn/user",
     username: "",
-    password: "",
     captcha: "",
-    captchaSrc: "https://backstage.edu.css0209.cn/user/captcha?path=" + time.getHours()+time.getMinutes()+time.getSeconds()+time.getMilliseconds(),
+    captchaSrc: "",
+    token: "",
     isLogin: false,
     info: {},
     gradeState: {
@@ -20,6 +21,7 @@ const defaultState = {
 };
 
 
+
 export default (state = defaultState, action) => {
     if (action.type === USERNAME_CHANGE) {
         const newState = JSON.parse(JSON.stringify(state));
@@ -29,7 +31,7 @@ export default (state = defaultState, action) => {
     if (action.type === CAPTCHASRC_CHANGE) {
         const newState = JSON.parse(JSON.stringify(state));
         let newTime = new Date();
-        newState.captchaSrc = "https://backstage.edu.css0209.cn/user/captcha?path=" + newTime.getHours()+newTime.getMinutes()+newTime.getSeconds()+newTime.getMilliseconds();
+        newState.captchaSrc = "https://backstage.edu.css0209.cn/user/captcha?token=" + newState.token + "&path=" + newTime.getHours() + newTime.getMinutes() + newTime.getSeconds() + newTime.getMilliseconds();
         return newState;
     }
     if (action.type === PASSWORD_CHANGE) {
@@ -52,7 +54,7 @@ export default (state = defaultState, action) => {
         newState.isLogin = action.value;
         return newState;
     }
-    if(action.type === SET_INFO){
+    if (action.type === SET_INFO) {
         const newState = JSON.parse(JSON.stringify(state));
         newState.info = action.json;
         return newState;
@@ -67,11 +69,17 @@ export default (state = defaultState, action) => {
         newState.isLogin = false;
         newState.info = {};
         newState.failedGrade = null;
+        newState.token = "";
         return newState;
     }
-    if(action.type === SEARCH_GRADE){
+    if (action.type === SEARCH_GRADE) {
         const newState = JSON.parse(JSON.stringify(state));
         newState.gradeState = action.json;
+        return newState;
+    }
+    if(action.type === GET_TOKEN){
+        const newState = JSON.parse(JSON.stringify(state));
+        newState.token = action.value;
         return newState;
     }
     return state;

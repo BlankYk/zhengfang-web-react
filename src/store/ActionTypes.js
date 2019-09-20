@@ -1,3 +1,4 @@
+export var GET_TOKEN = "getToken";
 export const USERNAME_CHANGE = 'usernameOnChange';
 export const PASSWORD_CHANGE = 'passwordChange';
 export const CAPTCHA_CHANGE = 'captchaChange';

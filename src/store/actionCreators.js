@@ -7,7 +7,8 @@ import {
     LOGINSTATE,
     SET_INFO,
     FAILED_GRADE,
-    LOGIN_OUT, SEARCH_GRADE
+    LOGIN_OUT, SEARCH_GRADE,
+    GET_TOKEN
 } from './ActionTypes';
 
 
@@ -56,4 +57,9 @@ export const failedGrade = (json)=>({
 export const searchGrade = (json)=>({
     type: SEARCH_GRADE,
     json
+});
+
+export const getToken = (value)=>({
+    type: GET_TOKEN,
+    value
 });

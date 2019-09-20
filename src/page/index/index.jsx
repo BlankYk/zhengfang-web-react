@@ -6,7 +6,6 @@ import {
 import store from '../../store/';
 import {loginChange, loginOut, setInfo} from "../../store/actionCreators";
 import Grade from "../grade";
-import Footer from "../footer";
 
 class Index extends React.Component {
     constructor(props) {
@@ -14,6 +13,7 @@ class Index extends React.Component {
         this.state = {
             infoLoading: true
         };
+        this.storeState = store.getState();
         this.handleGetState();
         this.handleLoginOut = this.handleLoginOut.bind(this);
         this.handleStoreChange = this.handleStoreChange.bind(this);
@@ -25,7 +25,11 @@ class Index extends React.Component {
     }
 
     handleGetState() {
-        fetch("https://backstage.edu.css0209.cn/user/myInfo?" + new Date().getMilliseconds(), {
+        if(this.storeState === ""){
+            this.props.history.push('login');
+            return;
+        }
+        fetch(this.storeState.backendHost+"/info?token="+this.storeState.token+"&?" + new Date().getMilliseconds(), {
             credentials: "include"
         }).then(rep => {
             return rep.json()
@@ -39,7 +43,7 @@ class Index extends React.Component {
                     infoLoading: false
                 })
             } else {
-                const action = loginChange(false);
+                const action = loginChange("");
                 store.dispatch(action);
                 this.props.history.push('login');
             }
@@ -47,7 +51,7 @@ class Index extends React.Component {
     }
 
     handleLoginOut() {
-        fetch("https://backstage.edu.css0209.cn/user/loginOut?"+new Date().getMilliseconds(), {
+        fetch(this.storeState.backendHost+"/loginOut?"+new Date().getMilliseconds(), {
             method: "delete",
             credentials: "include"
         }).then(rep => {

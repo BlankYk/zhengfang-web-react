@@ -6,7 +6,7 @@ import {
 } from "./style";
 import store from '../../store';
 import {
-    getUsernameOnchange, getCaptchaSrcChange, getPasswordChange, getCaptchaChange, loginChange
+    getUsernameOnchange, getCaptchaSrcChange, getPasswordChange, getCaptchaChange, loginChange,getToken
 } from '../../store/actionCreators';
 import Footer from "../footer";
 
@@ -15,21 +15,32 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = store.getState();
+        this.handleGetToken();
         this.handleStoreChange = this.handleStoreChange.bind(this);
         store.subscribe(this.handleStoreChange);
     }
     componentDidMount() {
-        this.handleCaptchaSrcChange();
+        setTimeout( ()=> {
+            this.handleCaptchaSrcChange();
+        },500);
         Modal.info({
             title: '使用前请阅读以下内容',
             content: (
                 <div>
-                    <p>本系统主要解决四川航天职业技术学院的教务系统端口是95的问题</p>
-                    <p>本系统暂时存在一个致命Bug导致只能一人登录，多人登录会导致之前登录的用户掉线</p>
-                    <p>如果你用解决方案请联系作者本人:<a href="tencent://message/?uin=917885215&Site=&Menu=yes">联系我</a></p>
+                    <p>本系统主要解决四川航天职业技术学院的教务系统端口是95的问题,不会存在账号安全问题，如对安全又担心可以查看 <a href="https://github.com/BlankYk/zhengfang-SpringBoot#%E5%8E%9F%E7%90%86" target='_blank'>原理</a> </p>
+                    <p>作者:<a href="tencent://message/?uin=917885215&Site=&Menu=yes" target='_blank'>联系我</a></p>
                 </div>
             ),
             onOk() {},
+        });
+    }
+    handleGetToken(){
+        fetch("https://backstage.edu.css0209.cn/user/token")
+            .then(rep => {
+                return rep.json();
+            }).then(json => {
+            const action = getToken(json.item.token);
+            store.dispatch(action);
         });
     }
 
@@ -40,12 +51,13 @@ class Login extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         message.loading("正在登录！");
-        fetch("https://backstage.edu.css0209.cn/user/login", {
+        fetch(this.state.backendHost+"/login", {
             method: "post",
             body: JSON.stringify({
                 'username': this.state.username,
                 'password': this.state.password,
-                'captcha': this.state.captcha
+                'captcha': this.state.captcha,
+                "token": this.state.token
             }),
             credentials: 'include',
             headers: new Headers({

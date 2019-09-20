@@ -1,7 +1,9 @@
 import React from "react";
 import {Table} from "antd";
+import store from '../../../store';
 
 class FailedGrade extends React.Component {
+    storeState = store.getState();
     constructor(props) {
         super(props);
         this.state = {
@@ -41,10 +43,16 @@ class FailedGrade extends React.Component {
         };
         this.handleFailedGrade();
         this.handleFailedGrade = this.handleFailedGrade.bind(this);
+        this.handleStoreChange = this.handleStoreChange.bind(this);
+        store.subscribe(this.handleStoreChange);
+    }
+
+    handleStoreChange() {
+        this.setState(store.getState());
     }
 
     handleFailedGrade() {
-        fetch("https://backstage.edu.css0209.cn/user/failedGrade?"+new Date().getMilliseconds(), {
+        fetch(this.storeState.backendHost+"/failedGrade?token="+this.storeState.token+"&?"+new Date().getMilliseconds(), {
             credentials: "include"
         }).then(rep => {
             return rep.json();

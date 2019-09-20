@@ -4,6 +4,7 @@ import store from "../../../store";
 
 class OtherGrade extends React.Component {
     storeState = store.getState().gradeState;
+    storeStateMain = store.getState();
     constructor(props) {
         super(props);
         this.state = {
@@ -89,10 +90,12 @@ class OtherGrade extends React.Component {
         this.setState({
             tableLoading: true
         });
-        fetch("https://backstage.edu.css0209.cn/user/selectGrade?year=" + this.storeState.year
+        fetch(this.storeStateMain.backendHost+"/selectGrade?year=" + this.storeState.year
             + "&semester=" + this.storeState.semester
             + "&courseNature=" + this.storeState.courseNature
-            + "&btn=" + this.storeState.btn+"&r="+Math.random(), {
+            + "&btn=" + this.storeState.btn
+            + "&token="+this.storeStateMain.token
+            +"&r="+Math.random(), {
             credentials: "include",
             cache: 'no-cache',
             headers: new Headers({
