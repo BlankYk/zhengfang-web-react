@@ -9,7 +9,7 @@ const defaultState = {
     username: "",
     captcha: "",
     captchaSrc: "",
-    token: "",
+    token: sessionStorage.getItem('token'),
     isLogin: false,
     info: {},
     gradeState: {

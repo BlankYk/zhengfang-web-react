@@ -29,7 +29,7 @@ class Index extends React.Component {
             this.props.history.push('login');
             return;
         }
-        fetch(this.storeState.backendHost+"/info?token="+sessionStorage.getItem('isLogin')+"&?" + new Date().getMilliseconds(), {
+        fetch(this.storeState.backendHost+"/info?token="+sessionStorage.getItem('token')+"&?" + new Date().getMilliseconds(), {
             credentials: "include"
         }).then(rep => {
             return rep.json()
