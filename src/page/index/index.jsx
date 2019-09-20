@@ -29,7 +29,7 @@ class Index extends React.Component {
             this.props.history.push('login');
             return;
         }
-        fetch(this.storeState.backendHost+"/info?token="+this.storeState.token+"&?" + new Date().getMilliseconds(), {
+        fetch(this.storeState.backendHost+"/info?token="+sessionStorage.getItem('isLogin')+"&?" + new Date().getMilliseconds(), {
             credentials: "include"
         }).then(rep => {
             return rep.json()
@@ -41,9 +41,9 @@ class Index extends React.Component {
                 store.dispatch(action1);
                 this.setState({
                     infoLoading: false
-                })
+                });
             } else {
-                const action = loginChange("");
+                const action = loginChange(false);
                 store.dispatch(action);
                 this.props.history.push('login');
             }
@@ -57,6 +57,7 @@ class Index extends React.Component {
         }).then(rep => {
             return rep.json();
         }).then(json => {
+            sessionStorage.clear();
             const action = loginOut();
             store.dispatch(action);
             message.info(json.msg);

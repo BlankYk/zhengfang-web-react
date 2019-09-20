@@ -69,6 +69,7 @@ class Login extends React.Component {
         }).then(data => {
             if (data.result === "success") {
                 message.info(data.msg);
+                sessionStorage.setItem('token',this.state.token)
                 const action = loginChange(true);
                 store.dispatch(action);
                 this.props.history.push('');
