@@ -16,7 +16,7 @@ const defaultState = {
         year: '',
         semester: '',
         courseNature: '',
-        btn: 'Button2'
+        btn: 'Button1'
     }
 };
 
@@ -30,8 +30,7 @@ export default (state = defaultState, action) => {
     }
     if (action.type === CAPTCHASRC_CHANGE) {
         const newState = JSON.parse(JSON.stringify(state));
-        let newTime = new Date();
-        newState.captchaSrc = "https://backstage.edu.css0209.cn/user/captcha?token=" + newState.token + "&path=" + newTime.getHours() + newTime.getMinutes() + newTime.getSeconds() + newTime.getMilliseconds();
+        newState.captchaSrc = "https://backstage.edu.css0209.cn/user/captcha?token=" + newState.token + "&path=" + Math.random(0,1)*100000000000000000;
         return newState;
     }
     if (action.type === PASSWORD_CHANGE) {

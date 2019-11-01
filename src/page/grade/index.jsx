@@ -5,6 +5,7 @@ import FailedGrade from "./failedGrade/failedGrade";
 import OtherGrade from "./otherGrade/otherGrade";
 import store from "../../store";
 import {searchGrade} from "../../store/actionCreators";
+import GradeStatistics from './gradeStatistics';
 
 class Grade extends React.Component {
     constructor(props) {
@@ -74,6 +75,8 @@ class Grade extends React.Component {
             grade = <FailedGrade/>
         } else if (btn === 'btn_xq' || btn === 'btn_xn' || btn === 'btn_zcj' || btn === 'btn_zg') {
             grade = <OtherGrade/>
+        } else if (btn === 'Button1'){
+            grade = <GradeStatistics/>
         } else {
             grade = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'做出你的选择,面对现实吧!'}/>
         }
@@ -124,8 +127,9 @@ class Grade extends React.Component {
                         </Col>
                         <Col>
                             <Form.Item label="查询对象">
-                                {getFieldDecorator('btn', {initialValue: 'Button2'})(
+                                {getFieldDecorator('btn', {initialValue: 'Button1'})(
                                     <Select className={"select"}>
+                                        <Option value={"Button1"}>成绩统计</Option>
                                         <Option value={"Button2"}>未通过成绩</Option>
                                         <Option value={"btn_xq"}>学期成绩</Option>
                                         <Option value={"btn_xn"}>学年成绩</Option>

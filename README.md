@@ -5,3 +5,6 @@
 - Redux
 - react-router-dom
 - Ant Design of React
+
+# 2019-11-01 更新
+添加了成绩统计模块，方便查询学分

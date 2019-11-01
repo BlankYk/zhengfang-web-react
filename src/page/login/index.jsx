@@ -20,27 +20,26 @@ class Login extends React.Component {
         store.subscribe(this.handleStoreChange);
     }
     componentDidMount() {
-        setTimeout( ()=> {
-            this.handleCaptchaSrcChange();
-        },500);
         Modal.info({
             title: '使用前请阅读以下内容',
             content: (
                 <div>
-                    <p>本系统主要解决四川航天职业技术学院的教务系统端口是95的问题,不会存在账号安全问题，如对安全又担心可以查看 <a href="https://github.com/BlankYk/zhengfang-SpringBoot#%E5%8E%9F%E7%90%86" target='_blank'>原理</a> </p>
-                    <p>作者:<a href="tencent://message/?uin=917885215&Site=&Menu=yes" target='_blank'>联系我</a></p>
+                    <p>本系统主要解决四川航天职业技术学院的教务系统端口是95的问题,不会存在账号安全问题，如对安全又担心可以查看 <a href="https://github.com/BlankYk/zhengfang-SpringBoot#%E5%8E%9F%E7%90%86" rel="noopener noreferrer" target='_blank'>原理</a> </p>
+                    <p>作者:<a href="tencent://message/?uin=917885215&Site=&Menu=yes" rel="noopener noreferrer" target='_blank'>联系我</a></p>
                 </div>
             ),
             onOk() {},
         });
     }
     handleGetToken(){
-        fetch("https://backstage.edu.css0209.cn/user/token")
+        let newTime = new Date();
+        fetch(this.state.backendHost+"/token?path=" + newTime.getHours() + newTime.getMinutes() + newTime.getSeconds() + newTime.getMilliseconds())
             .then(rep => {
                 return rep.json();
             }).then(json => {
             const action = getToken(json.item.token);
             store.dispatch(action);
+            this.handleCaptchaSrcChange();
         });
     }
 

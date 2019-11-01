@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table} from 'antd';
+import { Table } from 'antd';
 import store from "../../../store";
 
 class OtherGrade extends React.Component {
@@ -8,8 +8,8 @@ class OtherGrade extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tableLoading: true,
-            grade: null,
+            tableLoading: false,
+            grade: [],
             locale: {
                 filterTitle: '筛选',
                 filterConfirm: '确定',
@@ -56,23 +56,23 @@ class OtherGrade extends React.Component {
                 title: "辅修标记",
                 dataIndex: "fuxiubiaoji",
                 key: "fuxiubiaoji"
-            },{
+            }, {
                 title: "补考成绩",
                 dataIndex: "bukaochengji",
                 key: "bukaochengji",
-            },{
+            }, {
                 title: "重修成绩",
                 dataIndex: "chongxiuchengji",
                 key: "chongxiuchengji"
-            },{
+            }, {
                 title: "开课学院",
                 dataIndex: "kaikexueyuan",
                 key: "kaikexueyuan"
-            },{
+            }, {
                 title: "备注",
                 dataIndex: "beizhu",
                 key: "beizhu"
-            },{
+            }, {
                 title: "重修标记",
                 dataIndex: "chongxiubiaoji",
                 key: "chongxiubiaoji"
@@ -90,12 +90,12 @@ class OtherGrade extends React.Component {
         this.setState({
             tableLoading: true
         });
-        fetch(this.storeStateMain.backendHost+"/selectGrade?year=" + this.storeState.year
+        fetch(this.storeStateMain.backendHost + "/selectGrade?year=" + this.storeState.year
             + "&semester=" + this.storeState.semester
             + "&courseNature=" + this.storeState.courseNature
             + "&btn=" + this.storeState.btn
-            + "&token="+this.storeStateMain.token
-            +"&r="+Math.random(), {
+            + "&token=" + this.storeStateMain.token
+            + "&r=" + Math.random(), {
             credentials: "include",
             cache: 'no-cache',
             headers: new Headers({
@@ -103,11 +103,18 @@ class OtherGrade extends React.Component {
             })
         }).then(rep => {
             return rep.json();
-        }).then(json => {
-            this.setState({
-                grade: json.item.grade,
-                tableLoading: false
-            })
+        }).then(data => {
+            if (data.result === 'success') {
+                this.setState({
+                    grade: data.item.grade,
+                    tableLoading: false
+                })
+            }else{
+                this.setState({
+                    grade: [],
+                    tableLoading: false
+                })
+            }
         }).catch()
     }
 
@@ -116,7 +123,7 @@ class OtherGrade extends React.Component {
             <div>
                 <h2>成绩查询</h2>
                 <Table columns={this.state.GradeCol} dataSource={this.state.grade} loading={this.state.tableLoading}
-                       rowKey={(record, index) => index} locale={this.state.locale}/>
+                    rowKey={(record, index) => index} locale={this.state.locale} />
             </div>
         );
     }
