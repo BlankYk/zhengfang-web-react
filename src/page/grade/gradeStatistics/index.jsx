@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
+import { Table, Alert } from 'antd';
 import store from '../../../store'
 
 class GradeStatistics extends Component {
@@ -20,19 +20,19 @@ class GradeStatistics extends Component {
                     title: "课程性质名称",
                     dataIndex: "kechengxingzhimingcheng",
                     key: "kechengxingzhimingcheng"
-                },{
+                }, {
                     title: "未通过学分",
                     dataIndex: "weitongguoxuefen",
                     key: "weitongguoxuefen"
-                },{
+                }, {
                     title: "获得学分",
                     dataIndex: "huodexuefen",
                     key: "huodexuefen"
-                },{
+                }, {
                     title: "还需学分",
                     dataIndex: "haixuxuefen",
                     key: "haixuxuefen"
-                },{
+                }, {
                     title: "学分要求",
                     dataIndex: "xuefenyaoqiu",
                     key: "xuefenyaoqiu"
@@ -43,19 +43,19 @@ class GradeStatistics extends Component {
                     title: "课程属性名称",
                     dataIndex: "kechengguishumingcheng",
                     key: "kechengguishumingcheng"
-                },{
+                }, {
                     title: "未通过学分",
                     dataIndex: "weitongguoxuefen",
                     key: "weitongguoxuefen"
-                },{
+                }, {
                     title: "获得学分",
                     dataIndex: "huodexuefen",
                     key: "huodexuefen"
-                },{
+                }, {
                     title: "还需学分",
                     dataIndex: "haixuxuefen",
                     key: "haixuxuefen"
-                },{
+                }, {
                     title: "学分要求",
                     dataIndex: "xuefenyaoqiu",
                     key: "xuefenyaoqiu"
@@ -66,23 +66,23 @@ class GradeStatistics extends Component {
                     title: "学年",
                     dataIndex: "xuenian",
                     key: "xuenian"
-                },{
+                }, {
                     title: "学期",
                     dataIndex: "xueqi",
                     key: "xueqi"
-                },{
+                }, {
                     title: "获得学分",
                     dataIndex: "huodexuefen",
                     key: "huodexuefen"
-                },{
+                }, {
                     title: "不及格课程及学分",
                     dataIndex: "bujigekechengjixuefen",
                     key: "bujigekechengjixuefen"
-                },{
+                }, {
                     title: "未通过学分",
                     dataIndex: "weitongguoxuefen",
                     key: "weitongguoxuefen"
-                },{
+                }, {
                     title: "是否警告",
                     dataIndex: "shifoujinggao",
                     key: "shifoujinggao"
@@ -122,7 +122,7 @@ class GradeStatistics extends Component {
                     gradeStatistics: data.item.gradeStatistics,
                     tableLoading: false
                 })
-            }else{
+            } else {
                 this.setState({
                     grade: [],
                     tableLoading: false
@@ -134,17 +134,19 @@ class GradeStatistics extends Component {
     render() {
         return (
             <div>
+                <Alert type="error" message="成绩信息及名称完全来源于学校正方系统" />
                 <h3>成绩全览(不知道该叫啥)</h3>
-                <p>{this.state.gradeStatistics.averageScorePoint}&emsp;{this.state.gradeStatistics.totalPeople}&emsp;{this.state.gradeStatistics.sumOfGradePoints} </p>
-                <p>{this.state.gradeStatistics.creditStatistics}</p>
+                <Alert type="info" message={this.state.gradeStatistics.averageScorePoint + " " + this.state.gradeStatistics.totalPeople + " " + this.state.gradeStatistics.sumOfGradePoints} />
+                <Alert type="info" message={this.state.gradeStatistics.creditStatistics} />
                 <Table columns={this.state.Col2} dataSource={this.state.gradeStatistics.data2} loading={this.state.tableLoading}
                     rowKey={(record, index) => index} locale={this.state.locale} />
                 <h3>选修</h3>
+                <Alert type="info" message="我校规定大学3年选修(公共选修课)要修够6分,不能少于6分,也不可超过6分,如果学分不足可使用驾照等证件抵消(别问我有哪些,自己去问辅导员)" />
                 <Table columns={this.state.Col6} dataSource={this.state.gradeStatistics.data6} loading={this.state.tableLoading}
-                    rowKey={(record,index) => index} locale={this.state.locale} />
+                    rowKey={(record, index) => index} locale={this.state.locale} />
                 <h3>这个好像是重修 <span role="img" aria-label="horse">🐎</span>?</h3>
                 <Table columns={this.state.Col6} dataSource={this.state.gradeStatistics.data7} loading={this.state.tableLoading}
-                    rowKey={(record,index) => index} locale={this.state.locale} />
+                    rowKey={(record, index) => index} locale={this.state.locale} />
             </div>
         )
     }

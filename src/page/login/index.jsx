@@ -108,7 +108,7 @@ class Login extends React.Component {
                     <small>
                         本项目地址:前端: <a href="https://github.com/BlankYk/zhengfang-web-react" target={"_blank"}>zhengfang-web-react</a>
                         <br />后端: <a href="https://github.com/BlankYk/zhengfang-SpringBoot"  target={"_blank"}>zhengfang-SpringBoot</a>
-                        <br />作者Blog: <a href="https://css0209.cn" target={"_blank"}>BlankYk's Blog</a>
+                        <br />作者Blog: <a href="https://css0209.cn" target={"_blank"}>PaleBlueYk's Blog</a>
                     </small>
                     <Input size={"large"}
                            placeholder="学号" prefix={<Icon type="user"/>}

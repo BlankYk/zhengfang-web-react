@@ -53,7 +53,7 @@ class FailedGrade extends React.Component {
 
     handleFailedGrade() {
         fetch(this.storeState.backendHost+"/failedGrade?token="+this.storeState.token+"&?"+new Date().getMilliseconds(), {
-            credentials: "include"
+            credentials: "include",
         }).then(rep => {
             return rep.json();
         }).then(json => {
